@@ -1,4 +1,4 @@
-from django.template import Context, loader
+from django.template import Context, loader, RequestContext
 
 from maintenancemode.http import HttpResponseTemporaryUnavailable
 
