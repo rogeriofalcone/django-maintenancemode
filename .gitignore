@@ -7,6 +7,7 @@
 *.egg-info
 .project
 .pydevproject
+.komodoproject
 .DS_Store
 MANIFEST
 dist
