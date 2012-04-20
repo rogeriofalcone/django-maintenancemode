@@ -14,8 +14,8 @@ Installation
 ============
 
 * Download django-maintenancemode from http://pypi.python.org/pypi/django-maintenancemode
-  or http://code.google.com/p/django-maintenancemode/
-* Install using: `python setup.py install`
+  or https://github.com/shanx/django-maintenancemode
+* Install using: ``python setup.py install`` or your prefered installer
 * In your Django settings file add maintenancemode to your MIDDLEWARE_CLASSES.
   Make sure it comes after Django's AuthenticationMiddleware. Like so::
 
@@ -24,15 +24,14 @@ Installation
        'django.contrib.sessions.middleware.SessionMiddleware',
        'django.contrib.auth.middleware.AuthenticationMiddleware',
        'django.middleware.doc.XViewMiddleware',
-   
        'maintenancemode.middleware.MaintenanceModeMiddleware',
    )
 
 * django-maintenancemode works the same way as handling 404 or 500 error in
   Django work. It adds a handler503 which you can override in your main urls.py
   or you can add a 503.html to your templates directory.
-* In your Django settings file add a variable called MAINTENANCE_MODE. Setting
-  this variable to True activates the middleware.
+* In your Django settings file add a variable called ``MAINTENANCE_MODE``.
+  Setting this variable to ``True`` activates the middleware.
 
 
 Configuration
@@ -61,10 +60,22 @@ Example::
         r'^/contact'
     )
 
-Some observations:
+=================
+Some observations
+=================
 
 * If user is logged in and staff member, the maintenance page is
   not displayed.
 
-* If user's ip is in INTERNAL_IPS, the maintenance page is
+* If user's IP is in ``INTERNAL_IPS``, the maintenance page is
   not displayed.
+
+* To override the default view which is used if the maintenance mode
+  is enabled you can simply define a ``handler503`` variable in your
+  ROOT_URLCONF_, similar to how you would customize other `error handlers`_,
+  e.g.::
+
+      handler503 = 'mysite.views.maintenance_mode'
+
+.. _ROOT_URLCONF: https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
+.. _`404 handler`: https://docs.djangoproject.com/en/dev/topics/http/views/#customizing-error-views
